@@ -1,5 +1,81 @@
-{% extends 'gestion/base.html' %}
+{% extends 'management/base.html' %}
+
 
 {% block content %}
-<h2>Bienvenido a la Renta de Carros</h2>
+    <h2>Buscar</h2>
+    <form method="post" id="searchForm">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Buscar</button>
+    </form>
+
+    {% if clientes or carros or rentas %}
+        <h3>Resultados de la búsqueda</h3>
+        <h4>Clientes</h4>
+        <ul>
+            {% for cliente in clientes %}
+                <li>{{ cliente.nombre }} - {{ cliente.email }} - {{ cliente.telefono }}</li>
+            {% empty %}
+                <li>No se encontraron clientes.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Carros</h4>
+        <ul>
+            {% for carro in carros %}
+                <li>{{ carro.marca }} {{ carro.modelo }} ({{ carro.año }})</li>
+            {% empty %}
+                <li>No se encontraron carros.</li>
+            {% endfor %}
+        </ul>
+
+        <h4>Rentas</h4>
+        <ul>
+            {% for renta in rentas %}
+                <li>{{ renta.cliente.nombre }} - {{ renta.carro.marca }} {{ renta.carro.modelo }}</li>
+            {% empty %}
+                <li>No se encontraron rentas.</li>
+            {% endfor %}
+        </ul>
+    {% endif %}
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .btn {
+            background-color: #555;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #333;
+        }
+
+        h4 {
+            margin-top: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        li {
+            background-color: #f9f9f9;
+            margin-bottom: 5px;
+            padding: 10px;
+            border-radius: 5px;
+        }
+    </style>
+{% endblock %}
+
+{% block extra_js %}
+    <script>
+        document.getElementById('searchForm').onsubmit = function() {
+            alert('Buscando...');
+        };
+    </script>
 {% endblock %}

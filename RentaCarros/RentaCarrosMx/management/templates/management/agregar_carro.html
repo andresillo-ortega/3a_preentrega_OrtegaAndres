@@ -1,5 +1,26 @@
-{% extends 'gestion/base.html' %}
+{% extends 'management/base.html' %}
 
 {% block content %}
-<h2>Bienvenido a la Renta de Carros</h2>
+    <h2>Agregar Carro</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit" class="btn">Guardar Carro</button>
+    </form>
+{% endblock %}
+
+{% block extra_css %}
+    <style>
+        .btn {
+            background-color: #008CBA;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn:hover {
+            background-color: #007bb5;
+        }
+    </style>
 {% endblock %}
