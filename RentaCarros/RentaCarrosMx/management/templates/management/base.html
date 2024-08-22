@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Renta de Carros</title>
+</head>
+<body>
+    <header>
+        <h1>Renta de Carros</h1>
+        <nav>
+            <a href="{% url 'inicio' %}">Inicio</a>
+            <a href="{% url 'agregar_cliente' %}">Agregar Cliente</a>
+            <a href="{% url 'agregar_carro' %}">Agregar Carro</a>
+            <a href="{% url 'agregar_renta' %}">Registrar Renta</a>
+            <a href="{% url 'buscar' %}">Buscar</a>
+        </nav>
+    </header>
+    <main>
+        {% block content %}{% endblock %}
+    </main>
+</body>
+</html>
